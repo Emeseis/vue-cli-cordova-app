@@ -6,6 +6,31 @@
   <router-view/>
 </template>
 
+<script>
+export default {
+  name: "App",
+  created() {
+    this.registerPlugins()
+  },
+  methods: {
+    async registerPlugins() {
+      if (!this.$vuetify.display.mobile) return
+      
+      document.removeEventListener('resume', this.registerPlugins, false)
+
+      document.addEventListener('deviceready', async () => {
+        while (typeof window.plugins.zebra === 'undefined') {
+          await this.$nextTick();
+          console.group('Loading Scanner plugin...')
+          console.log(window.nfc)
+          console.groupEnd()
+        }
+      })    
+    }
+  }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

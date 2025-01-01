@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "lint": "vue-cli-service lint",
-    "build": "vue-cli-service build",
+    "prepare": "vue-cli-service cordova-prepare",
+    "build": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
     "android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-serve-android",
-    "build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
     "cordova-build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
     "cordova-build-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-build-browser",
     "cordova-build-electron": "cross-env CORDOVA_PLATFORM=electron vue-cli-service cordova-build-electron",
@@ -69,5 +68,10 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "overrides": {
+    "@vue/cli-shared-utils": {
+      "@achrinza/node-ipc": "9.2.5"
+    }
+  }
 }
