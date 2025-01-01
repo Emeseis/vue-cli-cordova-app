@@ -1,0 +1,20 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "../app.keystore",
+      "storePassword": "vuecordova",
+      "alias": "vueapp",
+      "password" : "vuecordova",
+      "keystoreType": "PKCS12",
+      "packageType": "apk"
+    },
+    "release": {
+      "keystore": "../app.keystore",
+      "storePassword": "vuecordova",
+      "alias": "vueapp",
+      "password" : "vuecordova",
+      "keystoreType": "PKCS12",
+      "packageType": "apk"
+    }
+  }
+}
