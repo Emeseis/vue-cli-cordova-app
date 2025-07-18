@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <h1>Sample Cordova App</h1>
+    <h1>Coming soon...</h1>
     <img height="200" alt="Vue logo" :src="require('../assets/logo.png')">
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home"
+  name: "CharRecognizer"
 }
 </script>

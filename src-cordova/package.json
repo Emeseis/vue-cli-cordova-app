@@ -2,7 +2,7 @@
   "name": "vue.scan.app",
   "displayName": "VueScanApp",
   "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "description": "A sample Apache Cordova application.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,14 +14,14 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^10.1.2",
-    "cordova-plugin-zebra-scanner-spectrum-2.0": "^1.0.12"
+    "cordova-plugin-zebra-scanner": "github:Emeseis/cordova-plugin-zebra-scanner"
   },
   "cordova": {
     "platforms": [
       "android"
     ],
     "plugins": {
-      "cordova-plugin-zebra-scanner-spectrum-2.0": {}
+      "cordova-plugin-zebra-scanner": {}
     }
   }
 }

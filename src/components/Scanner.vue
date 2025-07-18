@@ -8,19 +8,19 @@ export default {
   mounted() {
     this.registerScanner()
   },
-  unmounted() {
+  beforeUnmount() {
     this.unregisterScanner()
   },
   methods: {
     registerScanner() {
-      if (!this.$vuetify.display.mobile) return;
+      if (!this.$vuetify.display.mobile) return
 
       document.removeEventListener('resume', this.registerScanner, false)
 
-      if (window.plugins.zebra.scanner.test.available) {
-        window.plugins.zebra.scanner.test.stop()
+      if (window.plugins.zebra.scanner.available) {
+        window.plugins.zebra.scanner.stop()
         console.log('Scanner is available')
-        window.plugins.zebra.scanner.test.start(this.onSuccess, this.onFailure)
+        window.plugins.zebra.scanner.start(this.onSuccess, this.onFailure)
       } else {
         console.log('Scanner is not available')
       }
@@ -38,9 +38,9 @@ export default {
       console.groupEnd()
     },
     unregisterScanner() {
-      if (!this.$vuetify.display.mobile) return;
+      if (window.plugins.zebra.scanner.available || !this.$vuetify.display.mobile) return
 
-      window.plugins.zebra.scanner.test.stop()
+      window.plugins.zebra.scanner.stop()
     },
   }
 }
