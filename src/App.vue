@@ -1,24 +1,33 @@
 <template>
-  <nav class="font-weight-bold justify-space-between d-flex pa-6">
-    <router-link to="/">Home</router-link>
-    <router-link to="/code-reader">Code Reader</router-link>
-    <router-link to="/char-recognizer">Character Recognizer</router-link>
-  </nav>
-  <router-view/>
+  <v-app>
+    <component :is="layoutComponent">
+      <router-view/>
+    </component>
+  </v-app>
 </template>
 
 <script>
+import DefaultLayout from './layouts/DefaultLayout.vue'
+import EmptyLayout from './layouts/EmptyLayout.vue'
+
 export default {
-  name: "App",
+  name: 'App',
   created() {
-    this.registerPlugins()
+    this.registerMobilePlugins()
+  },
+  components: {
+    DefaultLayout,
+    EmptyLayout,
+  },
+  computed: {
+    layoutComponent() {
+      return this.$route.meta.layout || 'DefaultLayout'
+    },
   },
   methods: {
-    async registerPlugins() {
-      if (!this.$vuetify.display.mobile) return
-      
-      document.removeEventListener('resume', this.registerPlugins, false)
-
+    async registerMobilePlugins() {
+      if (!this.$vuetify.display.mobile) return      
+      document.removeEventListener('resume', this.registerMobilePlugins, false)
       document.addEventListener('deviceready', async () => {
         while (typeof window.plugins.zebra === 'undefined') {
           await this.$nextTick()

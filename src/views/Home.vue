@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="text-center">
     <h1>Sample Cordova App</h1>
     <img height="200" alt="Vue logo" :src="require('../assets/logo.png')">
   </div>
@@ -7,6 +7,6 @@
 
 <script>
 export default {
-  name: "Home"
+  name: 'Home'
 }
 </script>
