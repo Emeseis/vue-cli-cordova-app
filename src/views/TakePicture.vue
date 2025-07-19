@@ -1,20 +1,19 @@
 <template>
   <div class="text-center h-100">
     <v-carousel v-model="currentImageIndex" :show-arrows="false" :height="caroulselHeight">
-    <v-btn 
-      v-if="images.length" 
-      color="red" 
-      size="small"
-      icon="mdi-delete" 
-      class="position-absolute top-0 right-0 ma-3"
-      style="z-index: 999;"
-      @click="deleteImage" 
-    ></v-btn>
       <v-carousel-item v-for="(img, idx) in images" :key="idx">
         <div class="d-flex align-center justify-center fill-height" style="padding-bottom: 50px;">
           <v-img :src="img.src" :height="imageHeight" contain />
         </div>
       </v-carousel-item>
+      <v-btn 
+        v-if="images.length" 
+        color="red" 
+        size="small"
+        icon="mdi-delete" 
+        class="position-absolute top-0 right-0 ma-3"
+        @click="deleteImage" 
+      ></v-btn>
     </v-carousel>
     <div class="py-3 position-fixed bottom-0 w-100">
       <Camera @picture="onPicture" icon="mdi-camera-plus" :returnType="1" />
@@ -23,10 +22,10 @@
 </template>
 
 <script>
-import Camera from '@/components/Camera.vue';
+import Camera from '@/components/Camera.vue'
 
 export default {
-  name: 'TakePicture', 
+  name: 'TakePicture',
   components: {
     Camera
   },
@@ -34,13 +33,14 @@ export default {
     caroulselHeight() {
       const appBarHeight = 64
       const cameraButtonHeight = 88
+
       return window.innerHeight - appBarHeight - cameraButtonHeight
     },
     imageHeight() {
-      if (!this.images.length) return 0
       const img = this.images[this.currentImageIndex]
-      const ratio = img.height / img.width
-      return Math.floor(window.innerWidth * ratio)
+
+      if (img) return Math.floor(window.innerWidth * (img.height / img.width))
+      return 0
     }
   },
   data: () => ({
@@ -50,24 +50,27 @@ export default {
   methods: {
     async onPicture(base64Image) {
       const info = await this.loadImageInfo('data:image/jpeg;base64,' + base64Image)
+
       this.images.push(info)
       this.currentImageIndex = this.images.length - 1
     },
     loadImageInfo(src) {
       return new Promise(resolve => {
-        const img = new Image();
+        const img = new Image()
+
         img.onload = () => {
           resolve({
             src,
             width: img.width,
             height: img.height,
-          });
-        };
-        img.src = src;
-      });
+          })
+        }  
+        img.src = src
+      })
     },
     deleteImage() {
       this.images.splice(this.currentImageIndex, 1)
+
       if (this.currentImageIndex >= this.images.length) this.currentImageIndex = this.images.length - 1
       if (this.currentImageIndex < 0) this.currentImageIndex = 0
     }

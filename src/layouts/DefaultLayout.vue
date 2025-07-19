@@ -40,8 +40,7 @@ export default {
   }),
   methods: {
     changeRoute([route]) {
-      if (route === this.currentRoute) return      
-      this.$router.push(route)
+      if (route !== this.currentRoute) this.$router.push(route)
     }
   }
 }
