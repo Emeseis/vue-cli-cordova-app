@@ -51,6 +51,10 @@
     "env": {
       "node": true
     },
+    "globals": {
+      "cordova":"readonly",
+      "Camera": "readonly"
+    },
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended"
