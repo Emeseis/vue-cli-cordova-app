@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center" style="height: 100%;">
-    <h1>Scan any type of code</h1>
+  <div class="text-center">
+    <h1 class="my-3">Scan any type of code</h1>
     <img height="200" alt="Scan Logo" :src="require('../assets/scan.png')">
     <div class="code" v-if="scanned">
       <span>Código escaneado: </span>

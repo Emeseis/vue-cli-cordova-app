@@ -10,6 +10,11 @@ export const routes = [
     component: () => import('../views/CodeReader.vue')
   },
   {
+    path: '/take-picture',
+    name: 'Take Picture',
+    component: () => import('../views/TakePicture.vue')
+  },
+  {
     path: '/text-recognizer',
     name: 'Text Recognizer',
     component: () => import('../views/TextRecognizer.vue')

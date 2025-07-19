@@ -32,8 +32,9 @@ export default {
   data: () => ({
     drawer: false,
     items: [
-      { title: 'Home', value: '/', props: { prependIcon: 'mdi-home' } },
+      { title: 'Home', value: '/', props: { prependIcon: 'mdi-home-outline' } },
       { title: 'Code Reader', value: '/code-reader', props: { prependIcon: 'mdi-barcode-scan' } },
+      { title: 'Take Picture', value: '/take-picture', props: { prependIcon: 'mdi-camera-outline' } },
       { title: 'Text Recognizer', value: '/text-recognizer', props: { prependIcon: 'mdi-text-recognition' } },
     ]
   }),
