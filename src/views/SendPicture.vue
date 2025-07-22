@@ -16,7 +16,7 @@
       ></v-btn>
     </v-carousel>
     <div class="py-3 position-fixed bottom-0 w-100">
-      <Camera @picture="onPicture" icon="mdi-camera-plus" :returnType="1" />
+      <Camera @picture="onPicture" icon="mdi-camera-plus" />
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@
 import Camera from '@/components/Camera.vue'
 
 export default {
-  name: 'TakePicture',
+  name: 'SendPicture',
   components: {
     Camera
   },
@@ -48,25 +48,9 @@ export default {
     currentImageIndex: 0,
   }),
   methods: {
-    async onPicture(base64Image) {
-      const info = await this.loadImageInfo('data:image/jpeg;base64,' + base64Image)
-
-      this.images.push(info)
+    async onPicture(image) {
+      this.images.push(image)
       this.currentImageIndex = this.images.length - 1
-    },
-    loadImageInfo(src) {
-      return new Promise(resolve => {
-        const img = new Image()
-
-        img.onload = () => {
-          resolve({
-            src,
-            width: img.width,
-            height: img.height,
-          })
-        }  
-        img.src = src
-      })
     },
     deleteImage() {
       this.images.splice(this.currentImageIndex, 1)

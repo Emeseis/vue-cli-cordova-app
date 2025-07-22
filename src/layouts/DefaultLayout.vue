@@ -34,7 +34,7 @@ export default {
     items: [
       { title: 'Home', value: '/', props: { prependIcon: 'mdi-home-outline' } },
       { title: 'Code Reader', value: '/code-reader', props: { prependIcon: 'mdi-barcode-scan' } },
-      { title: 'Take Picture', value: '/take-picture', props: { prependIcon: 'mdi-camera-outline' } },
+      { title: 'Send Picture', value: '/send-picture', props: { prependIcon: 'mdi-camera-outline' } },
       { title: 'Text Recognizer', value: '/text-recognizer', props: { prependIcon: 'mdi-text-recognition' } },
     ]
   }),
