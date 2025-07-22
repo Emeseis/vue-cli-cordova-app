@@ -15,8 +15,11 @@
         @click="deleteImage" 
       ></v-btn>
     </v-carousel>
-    <div class="py-3 position-fixed bottom-0 w-100">
-      <Camera @picture="onPicture" icon="mdi-camera-plus" />
+    <div class="py-3 position-fixed bottom-0 w-100 justify-space-around d-flex align-center">
+      <div style="width: 56px;"></div>
+      <Camera @picture="onPicture" :icon="isCameraPresent ? 'mdi-camera-plus' : 'mdi-image-plus'" />
+      <Camera @picture="onPicture" icon="mdi-image-plus" :sourceType="0" size="large" v-if="isCameraPresent" />
+      <div style="width: 56px;" v-else></div>
     </div>
   </div>
 </template>
@@ -46,7 +49,11 @@ export default {
   data: () => ({
     images: [],
     currentImageIndex: 0,
+    isCameraPresent: true,
   }),
+  mounted() {
+    cordova.plugins.diagnostic.isCameraPresent(hasCamera => this.isCameraPresent = hasCamera)
+  },
   methods: {
     async onPicture(image) {
       this.images.push(image)
