@@ -8,7 +8,7 @@ export default {
   mounted() {
     this.registerScanner()
   },
-  beforeUnmount() {
+  unmounted() {
     this.unregisterScanner()
   },
   methods: {
@@ -19,10 +19,10 @@ export default {
 
       if (window.plugins.zebra.scanner.available) {
         window.plugins.zebra.scanner.stop()
-        console.log('Scanner is available')
+        console.log('Zebra Scanner is available')
         window.plugins.zebra.scanner.start(this.onSuccess, this.onFailure)
       } else {
-        console.log('Scanner is not available')
+        console.log('Zebra Scanner is not available')
       }
     },
     onSuccess({ data, type, timestamp }) {
@@ -37,10 +37,10 @@ export default {
       console.log(err.message)
       console.groupEnd()
     },
-    unregisterScanner() {
-      if (window.plugins.zebra.scanner.available || !this.$vuetify.display.mobile) return
+    unregisterScanner() {      
+      if (!window.plugins.zebra.scanner.available || !this.$vuetify.display.mobile) return
 
-      window.plugins.zebra.scanner.stop()
+      window.plugins.zebra.scanner.stop()      
     },
   }
 }
