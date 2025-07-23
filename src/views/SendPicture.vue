@@ -7,7 +7,7 @@
         </div>
       </v-carousel-item>
       <v-btn 
-        v-if="images.length" 
+        v-show="images.length" 
         color="red" 
         size="small"
         icon="mdi-delete" 
@@ -15,12 +15,17 @@
         @click="deleteImage" 
       ></v-btn>
     </v-carousel>
-    <div class="py-3 position-fixed bottom-0 w-100 justify-space-around d-flex align-center">
-      <div style="width: 56px;"></div>
-      <Camera @picture="onPicture" :icon="isCameraPresent ? 'mdi-camera-plus' : 'mdi-image-plus'" />
-      <Camera @picture="onPicture" icon="mdi-image-plus" :sourceType="0" size="large" v-if="isCameraPresent" />
-      <div style="width: 56px;" v-else></div>
-    </div>
+    <v-row no-gutters class="py-3 position-absolute bottom-0 w-100">
+      <v-col cols="4">
+        <Camera @picture="onPicture" icon="mdi-image-plus" :sourceType="0" color="gray" v-show="isCameraPresent" />
+      </v-col>
+      <v-col cols="4">
+        <Camera @picture="onPicture" :icon="isCameraPresent ? 'mdi-camera-plus' : 'mdi-image-plus'" />
+      </v-col>
+      <v-col cols="4">
+        <v-btn @click="onSendEmail" icon="mdi-send" color="blue" size="x-large" v-show="images.length"></v-btn>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -64,7 +69,12 @@ export default {
 
       if (this.currentImageIndex >= this.images.length) this.currentImageIndex = this.images.length - 1
       if (this.currentImageIndex < 0) this.currentImageIndex = 0
-    }
+    },
+    onSendEmail() {
+      console.group('Send Picture')
+      this.images.forEach(i => console.log(i.src))
+      console.groupEnd()
+    },
   }
 }
 </script>
