@@ -1,10 +1,75 @@
 <template>
-  <div class="text-center">
+  <div class="text-center h-100">
+    <v-carousel v-model="currentImageIndex" :show-arrows="false" :height="caroulselHeight">
+      <v-btn 
+        v-if="images.length" 
+        color="red" 
+        icon="mdi-trash-can" 
+        style="z-index: 999;"
+        class="position-absolute top-0 right-0"
+        @click="deleteImage" 
+      ></v-btn>
+      <v-carousel-item v-for="(img, idx) in images" :key="idx">
+        <div class="d-flex align-center justify-center fill-height" style="padding-bottom: 50px;">
+          <v-img :src="img.src" :height="imageHeight" contain></v-img>
+        </div>
+      </v-carousel-item>
+    </v-carousel>
+    <div class="py-3 position-fixed bottom-0 w-100">      
+      <Camera @picture="onPicture" :returnType="1" />
+    </div>
   </div>
 </template>
 
 <script>
+import Camera from '@/components/Camera.vue'
+
 export default {
-  name: 'TextRecognizer'
+  name: 'TextRecognizer', 
+  components: {
+    Camera
+  },
+  computed: {
+    caroulselHeight() {
+      const appBarHeight = 64
+      const cameraButtonHeight = 88
+      return window.innerHeight - appBarHeight - cameraButtonHeight
+    },
+    imageHeight() {
+      if (!this.images.length) return 0
+      const img = this.images[this.currentImageIndex]
+      const ratio = img.height / img.width
+      return Math.floor(window.innerWidth * ratio)
+    }
+  },
+  data: () => ({
+    images: [],
+    currentImageIndex: 0,
+  }),
+  methods: {
+    async onPicture(base64Image) {
+      const info = await this.loadImageInfo('data:image/jpeg;base64,' + base64Image)
+      this.images.push(info)
+      this.currentImageIndex = this.images.length - 1
+    },
+    loadImageInfo(src) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => {
+          resolve({
+            src,
+            width: img.width,
+            height: img.height,
+          });
+        };
+        img.src = src;
+      });
+    },
+    deleteImage() {
+      this.images.splice(this.currentImageIndex, 1)
+      if (this.currentImageIndex >= this.images.length) this.currentImageIndex = this.images.length - 1
+      if (this.currentImageIndex < 0) this.currentImageIndex = 0
+    }
+  }
 }
 </script>

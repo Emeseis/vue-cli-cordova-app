@@ -123,10 +123,10 @@ export default {
       }
 
       // Check camera presence and then proceed
-      cordova.plugins.diagnostic.isCameraPresent(hasCamera => {
+      cordova.plugins.diagnostic.isCameraPresent((hasCamera) => {
         const sourceType = hasCamera ? this.sourceType : Camera.PictureSourceType.PHOTOLIBRARY
         this.onCamera(sourceType)
-      }, err => {
+      }, (err) => {
         console.error('Error checking camera presence:', err)
         this.onCamera(this.sourceType) // Fallback to default if check fails
       })

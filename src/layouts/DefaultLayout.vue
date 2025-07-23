@@ -10,7 +10,7 @@
       <v-btn icon="mdi-arrow-u-down-left mdi-rotate-90" @click="$router.back"></v-btn>
     </template>
   </v-app-bar>
-  <v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'bottom' : undefined">
+  <v-navigation-drawer v-model="drawer" location="bottom">
     <v-list mandatory :items="items" :selected="selected" @update:selected="changeRoute"></v-list>
   </v-navigation-drawer>
   <v-main>
@@ -27,14 +27,14 @@ export default {
     },
     selected() {
       return [this.currentRoute]
-    }
+    },
   },
   data: () => ({
     drawer: false,
     items: [
       { title: 'Home', value: '/', props: { prependIcon: 'mdi-home-outline' } },
-      { title: 'Code Reader', value: '/code-reader', props: { prependIcon: 'mdi-barcode-scan' } },
       { title: 'Send Picture', value: '/send-picture', props: { prependIcon: 'mdi-camera-outline' } },
+      { title: 'Code Reader', value: '/code-reader', props: { prependIcon: 'mdi-barcode-scan' } },
       { title: 'Text Recognizer', value: '/text-recognizer', props: { prependIcon: 'mdi-text-recognition' } },
     ]
   }),

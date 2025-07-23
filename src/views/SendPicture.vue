@@ -71,7 +71,7 @@ export default {
       if (this.currentImageIndex < 0) this.currentImageIndex = 0
     },
     onSendEmail() {
-      console.group('Send Picture')
+      console.group('Pictures')
       this.images.forEach(i => console.log(i.src))
       console.groupEnd()
     },
