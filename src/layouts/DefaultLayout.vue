@@ -13,7 +13,7 @@
   <v-navigation-drawer v-model="drawer" location="bottom">
     <v-list mandatory :items="items" :selected="selected" @update:selected="changeRoute"></v-list>
   </v-navigation-drawer>
-  <v-main>
+  <v-main style="max-height: 100dvh;">
     <slot />
   </v-main>
 </template>

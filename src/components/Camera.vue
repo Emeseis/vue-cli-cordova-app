@@ -33,11 +33,12 @@ export default {
      *
      * - DATA_URL: 0 – Return image as base64-encoded string
      * - FILE_URI: 1 – Return image file URI
+     * - BLOB_URL: 2 – Return image Blob URL
      */
     returnType: {
       type: Number,
-      default: Camera.DestinationType.FILE_URI,
-      validator: (value) => Object.values(Camera.DestinationType).includes(value),
+      default: 1,
+      validator: (value) => [0, 1, 2].includes(value),
     },
     /**
      * Set the source of the picture.
@@ -77,8 +78,14 @@ export default {
     },
     async loadImageInfo(imageData) {
       let imageSrc = imageData
+      
+      if (this.returnType === 1) {        
+        this.$emit('picture', imageData)
+        return
+      }
 
-      if (this.returnType === Camera.DestinationType.FILE_URI && imageData.startsWith('file://')) {
+      if (this.returnType === 2 && imageData.startsWith('file://')) {
+        
         try {
           imageSrc = await this.convertFileUriToBlobUrl(imageData)
         } catch (err) {
@@ -133,7 +140,7 @@ export default {
     },
     onCamera(sourceType) {
       navigator.camera.getPicture(this.onSuccess, this.onFailure, {
-        destinationType: this.returnType,
+        destinationType: this.returnType === 2 ? 1 : this.returnType,
         sourceType: sourceType,
         correctOrientation: true,
       })

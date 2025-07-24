@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <component :is="layoutComponent">
-      <router-view/>
+      <router-view />
     </component>
   </v-app>
 </template>

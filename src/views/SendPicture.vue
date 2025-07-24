@@ -17,13 +17,13 @@
     </v-carousel>
     <v-row no-gutters class="py-3 position-absolute bottom-0 w-100">
       <v-col cols="4">
-        <Camera @picture="onPicture" icon="mdi-image-plus" :sourceType="0" color="gray" v-show="isCameraPresent" />
+        <Camera @picture="onPicture" icon="mdi-image-plus" :sourceType="0" color="gray" :returnType="2" v-show="isCameraPresent" />
       </v-col>
       <v-col cols="4">
-        <Camera @picture="onPicture" :icon="isCameraPresent ? 'mdi-camera-plus' : 'mdi-image-plus'" />
+        <Camera @picture="onPicture" :icon="isCameraPresent ? 'mdi-camera-plus' : 'mdi-image-plus'" :returnType="2" />
       </v-col>
       <v-col cols="4">
-        <v-btn @click="onSendEmail" icon="mdi-send" color="blue" size="x-large" v-show="images.length"></v-btn>
+        <v-btn @click="onSendEmail" icon="mdi-send" color="blue" size="x-large" v-show="images.length" :returnType="2" />
       </v-col>
     </v-row>
   </div>
